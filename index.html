@@ -20,10 +20,6 @@
 </head>
 <body>
     <h1>Thư Viện Thơ</h1>
-    
-    <select id="poemSelect">
-        <option value="">Chọn bài thơ</option>
-    </select>
 
     <audio id="poemAudio" controls>
         Trình duyệt của bạn không hỗ trợ audio.
@@ -34,37 +30,21 @@
         const poems = [
             { id: 1, name: "Bài thơ 1", audioUrl: "records/bai1.mp3" },
             { id: 2, name: "Bài thơ 2", audioUrl: "records/bai2.mp3" },
-            { id: 3, name: "Bài thơ 2", audioUrl: "records/bai3.mp3" }
-            // Thêm các bài thơ khác
+            { id: 3, name: "Bài thơ 3", audioUrl: "records/bai3.mp3" },
+            { id: 4, name: "Người con gái", audioUrl: "records/Nguoi-con-gai-NX.mp3" }
         ];
 
-        const poemSelect = document.getElementById('poemSelect');
         const poemAudio = document.getElementById('poemAudio');
-
-        // Điền danh sách bài thơ vào select
-        poems.forEach(poem => {
-            const option = document.createElement('option');
-            option.value = poem.id;
-            option.textContent = poem.name;
-            poemSelect.appendChild(option);
-        });
 
         // Hàm phát bài thơ
         function playPoem(poemId) {
             const selectedPoem = poems.find(poem => poem.id == poemId);
             
             if (selectedPoem) {
-                poemSelect.value = selectedPoem.id;
                 poemAudio.src = selectedPoem.audioUrl;
                 poemAudio.play();
             }
         }
-
-        // Sự kiện khi chọn bài thơ
-        poemSelect.addEventListener('change', (e) => {
-            const selectedPoemId = e.target.value;
-            playPoem(selectedPoemId);
-        });
 
         // Kiểm tra URL parameter khi trang load
         window.addEventListener('load', () => {

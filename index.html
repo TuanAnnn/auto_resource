@@ -1,61 +1,73 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư Viện Thơ</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-        audio {
-            max-width: 100%;
-            margin: 20px 0;
-        }
-    </style>
-</head>
-<body>
-    <h1>Thư Viện Thơ</h1>
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Thư Viện Thơ</title>
+   <style>
+     body {
+       font-family: Arial, sans-serif;
+       max-width: 800px;
+       margin: 0 auto;
+       padding: 20px;
+       text-align: center;
+     }
+     audio {
+       max-width: 100%;
+       margin: 20px 0;
+     }
+   </style>
+ </head>
+ <body>
+   <h1 id="poemTitle">Bài Thơ</h1>
 
-    <audio id="poemAudio" controls>
-        Trình duyệt của bạn không hỗ trợ audio.
-    </audio>
+   <audio id="poemAudio" controls>
+     Trình duyệt của bạn không hỗ trợ audio.
+   </audio>
 
-    <script>
-        // Mảng chứa thông tin các bài thơ
-        const poems = [
-            { id: 1, name: "Bài thơ 1", audioUrl: "records/bai1.mp3" },
-            { id: 2, name: "Bài thơ 2", audioUrl: "records/bai2.mp3" },
-            { id: 3, name: "Bài thơ 3", audioUrl: "records/bai3.mp3" },
-            { id: 4, name: "Người con gái", audioUrl: "records/Nguoi-con-gai-NX.mp3" }
-        ];
+   <script>
+     // Mảng chứa thông tin các bài thơ
+     const poems = [
+       {
+         id: 1,
+         name: "Vẻ đẹp của Sông Đà - Nguyễn Tuân",
+         audioUrl: "records/ve-dep-song-da.mp3",
+       },
+       {
+         id: 2,
+         name: "Về hình tượng Bà Tú trong bài Thương vợ - Chu Văn Sơn",
+         audioUrl: "records/ve-hinh-tuong-ba-tu-trong-bai-thuong-vo.mp3",
+       },
+       {
+         id: 3,
+         name: "Vẻ đẹp của Sông Đà - Nguyễn Tuân",
+         audioUrl: "records/tho-ca.mp3",
+       },
+     ];
 
-        const poemAudio = document.getElementById('poemAudio');
+     const poemAudio = document.getElementById("poemAudio");
+     const poemTitle = document.getElementById("poemTitle");
 
-        // Hàm phát bài thơ 
-        // test deploy
-        function playPoem(poemId) {
-            const selectedPoem = poems.find(poem => poem.id == poemId);
-            
-            if (selectedPoem) {
-                poemAudio.src = selectedPoem.audioUrl;
-                poemAudio.play();
-            }
-        }
+     // Hàm phát bài thơ
+     function playPoem(poemId) {
+       const selectedPoem = poems.find((poem) => poem.id == poemId);
 
-        // Kiểm tra URL parameter khi trang load
-        window.addEventListener('load', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const poemId = urlParams.get('poem');
-            
-            if (poemId) {
-                playPoem(poemId);
-            }
-        });
-    </script>
-</body>
+       if (selectedPoem) {
+         poemAudio.src = selectedPoem.audioUrl;
+         poemTitle.textContent = selectedPoem.name;
+         poemAudio.play();
+       }
+     }
+
+     // Kiểm tra URL parameter khi trang load
+     window.addEventListener("load", () => {
+       const urlParams = new URLSearchParams(window.location.search);
+       const poemId = urlParams.get("poem");
+
+       if (poemId) {
+         playPoem(poemId);
+       }
+     });
+   </script>
+ </body>
 </html>
